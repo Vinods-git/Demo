@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-        
 
         stage('Build') {
             steps {
@@ -18,9 +17,12 @@ pipeline {
 
         stage('Report') {
             steps {
-                publishHTML([
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
                     reportDir: 'target',
-                    reportFiles: 'extent-report.html',
+                    reportFiles: 'ExtentReport.html',
                     reportName: 'Test Report'
                 ])
             }
